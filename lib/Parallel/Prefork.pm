@@ -191,7 +191,7 @@ sub _action_for {
 sub wait_all_children {
     my $self = shift;
     $self->{_no_adjust_until} = undef;
-    while (%{$self->{worker_pids}}) {
+    while (keys %{$self->{worker_pids}}) {
         if (my ($pid) = $self->_wait(1)) {
             if (delete $self->{worker_pids}{$pid}) {
                 $self->_on_child_reap($pid, $?);
